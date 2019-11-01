@@ -1,0 +1,13 @@
+{
+  "name": "lightningdown",
+  "version": "1.0.0",
+  "description": "This guide helps Salesforce developers who are new to Visual Studio Code go from zero to a deployed app using Salesforce Extensions for VS Code and Salesforce CLI.",
+  "main": "index.js",
+  "scripts": {
+    "start": "sfdx force:lightning:lwc:start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
