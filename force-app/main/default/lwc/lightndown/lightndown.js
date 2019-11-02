@@ -1,28 +1,39 @@
-import { api, track, LightningElement } from 'lwc';
+import { api, LightningElement } from 'lwc';
 import { marked } from './markdown';
 
 export default class lightndown extends LightningElement {
 
-    @track textContent = ''
-
-    @api url = 'https://raw.githubusercontent.com/jsmithdev/modal/master/README.md'
+    @api url 
+    @api string 
 
     connectedCallback(){
         
         if(!this.init){
+            
             this.init = true
+
             if(this.url){
-                this.getDown()
+
+                this.getDown(this.url)
+            }
+            else if(this.string){
+
+                // eslint-disable-next-line @lwc/lwc/no-async-operation
+                setTimeout(() => this.setMarkdown(this.string), 0)
             }
         }
     }
     
-    async getDown(){
+    async getDown(url){
         
-        const content = await (await fetch(this.url)).text()
-        console.log(content)
-        this.markdown = marked()(content)
+        const markdown = await (await fetch(url)).text()
+        
+        this.setMarkdown(markdown)
+    }
 
-        this.template.querySelector('pre').innerHTML = this.markdown;
+    setMarkdown(markdown){
+
+        // eslint-disable-next-line @lwc/lwc/no-inner-html
+        this.template.querySelector('pre').innerHTML = marked()(markdown);
     }
 }
