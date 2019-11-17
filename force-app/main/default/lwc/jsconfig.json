@@ -5,9 +5,6 @@
         "paths": {
             "c/lightndown": [
                 "lightndown/lightndown.js"
-            ],
-            "c/demo": [
-                "demo/demo.js"
             ]
         }
     },
