@@ -1,5 +1,18 @@
 import { api, LightningElement } from 'lwc';
 import { marked } from './markdown';
+import { hljs } from './highlight';
+
+const toHTML = marked()
+const highlight = hljs({})
+
+toHTML.setOptions({
+    highlight: function(code) {
+        console.dir(highlight.getLanguage('xml'))
+        console.dir(code)
+        return highlight.highlight(`<code class="xml">${code}</code>`).value
+    }
+});
+  
 
 export default class lightndown extends LightningElement {
 
@@ -34,6 +47,6 @@ export default class lightndown extends LightningElement {
     setMarkdown(markdown){
 
         // eslint-disable-next-line @lwc/lwc/no-inner-html
-        this.template.querySelector('pre').innerHTML = marked()(markdown);
+        this.template.querySelector('pre').innerHTML = toHTML(markdown);
     }
 }
